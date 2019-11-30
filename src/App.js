@@ -11,7 +11,8 @@ class App extends Component {
       {id: '123sfdf', name: 'Max', age: 39, children: 'Rajdy'},
       {id: 'spuydse', name: 'Stefania', age: 25}
     ],
-    otherState: 'Other state value'
+    otherState: 'Other state value',
+    showPersons: false
   }
 
   sortPersons = () => {
@@ -23,6 +24,11 @@ class App extends Component {
 
   sortByAge = (a,b) => {
     return a.age - b.age;
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
   }
 
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
@@ -38,25 +44,27 @@ class App extends Component {
 
     return (
       <div className="App">
-        <button onClick={this.sortPersons}>Switch name</button>
-        <h1>"map" function test with sorting</h1>
-        <Persons arr={displayArr.sort(this.sortByAge)}></Persons>
-        <hr></hr>
-        <h1>"find" function test, condition: "element.age > 25"</h1>
-        <Persons arr={[displayArr.find(element => element.age > 25)]}></Persons>
-        <hr></hr>
-        <h1>"filter" function test, condition: element.age > 25</h1>
-        <Persons arr={displayArr.filter(element => element.age > 25)}></Persons>
-        <hr></hr>
-        <h1>"splice" function test, adding "someOtherPersons"</h1>
-        {displayArr.splice(displayArr.length,0,...this.someOtherPersons)}
-        <Persons arr={displayArr}></Persons>
-        <hr></hr>
-        <h1>"entries" test</h1>
-        <Persons arr={newDisplayArr}></Persons>
-        <hr></hr>
-        <h1>"concat" test</h1>
-        <Persons arr={newDisplayArr.concat(this.someOtherPersons)}></Persons>
+        <button onClick={this.togglePersonsHandler}>Show persons</button>
+        { this.state.showPersons ? <div>
+          <h1>"map" function test with sorting</h1>
+          <Persons arr={displayArr.sort(this.sortByAge)}></Persons>
+          <hr></hr>
+          <h1>"find" function test, condition: "element.age > 25"</h1>
+          <Persons arr={[displayArr.find(element => element.age > 25)]}></Persons>
+          <hr></hr>
+          <h1>"filter" function test, condition: element.age > 25</h1>
+          <Persons arr={displayArr.filter(element => element.age > 25)}></Persons>
+          <hr></hr>
+          <h1>"splice" function test, adding "someOtherPersons"</h1>
+          {displayArr.splice(displayArr.length,0,...this.someOtherPersons)}
+          <Persons arr={displayArr}></Persons>
+          <hr></hr>
+          <h1>"entries" test</h1>
+          <Persons arr={newDisplayArr}></Persons>
+          <hr></hr>
+          <h1>"concat" test</h1>
+          <Persons arr={newDisplayArr.concat(this.someOtherPersons)}></Persons>
+        </div> : null }
       </div>
     );
   }
