@@ -54,11 +54,20 @@ class App extends Component {
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
   
   render() {
+
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     const displayArr = this.state.persons.slice();
 
     return (
       <div className="App">
-        <button onClick={this.togglePersonsHandler}>Show persons</button>
+        <button style={style} onClick={this.togglePersonsHandler}>Pokaż ziomków</button>
         { this.state.showPersons ? <div>
           <h1>"map" function test with sorting</h1>
           <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.sort(this.sortByAge)}></Persons>
