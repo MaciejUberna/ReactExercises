@@ -31,6 +31,20 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
 
+  nameChangedHandler = () => {
+    
+  }
+
+  deletePerson = (id) => {
+    const personIndex = this.state.persons.findIndex(element => element.id === id);
+    if (personIndex !== -1) {
+      const newPersons = this.state.persons.slice();
+      newPersons.splice(personIndex,1);
+      console.log('newPersons length: '+newPersons.length);
+      this.setState({persons: newPersons});
+    }
+  }
+
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
   
   render() {
@@ -47,23 +61,23 @@ class App extends Component {
         <button onClick={this.togglePersonsHandler}>Show persons</button>
         { this.state.showPersons ? <div>
           <h1>"map" function test with sorting</h1>
-          <Persons arr={displayArr.sort(this.sortByAge)}></Persons>
+          <Persons click={this.deletePerson} arr={displayArr.sort(this.sortByAge)}></Persons>
           <hr></hr>
           <h1>"find" function test, condition: "element.age > 25"</h1>
-          <Persons arr={[displayArr.find(element => element.age > 25)]}></Persons>
+          <Persons click={this.deletePerson} arr={[displayArr.find(element => element.age > 25)]}></Persons>
           <hr></hr>
           <h1>"filter" function test, condition: element.age > 25</h1>
-          <Persons arr={displayArr.filter(element => element.age > 25)}></Persons>
+          <Persons click={this.deletePerson} arr={displayArr.filter(element => element.age > 25)}></Persons>
           <hr></hr>
           <h1>"splice" function test, adding "someOtherPersons"</h1>
           {displayArr.splice(displayArr.length,0,...this.someOtherPersons)}
-          <Persons arr={displayArr}></Persons>
+          <Persons click={this.deletePerson} arr={displayArr}></Persons>
           <hr></hr>
           <h1>"entries" test</h1>
-          <Persons arr={newDisplayArr}></Persons>
+          <Persons click={this.deletePerson} arr={newDisplayArr}></Persons>
           <hr></hr>
           <h1>"concat" test</h1>
-          <Persons arr={newDisplayArr.concat(this.someOtherPersons)}></Persons>
+          <Persons click={this.deletePerson} arr={newDisplayArr.concat(this.someOtherPersons)}></Persons>
         </div> : null }
       </div>
     );

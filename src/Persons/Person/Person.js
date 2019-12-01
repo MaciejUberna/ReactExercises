@@ -7,9 +7,11 @@ const Person = (props) => {
     if ( props.children ) {
         person.push(<p key={props.id.concat('2')}>A moje hobby to: {props.children} </p>);
     }
-    
+    person.push(<input key={props.id.concat('3')} type="text"/>)
     return (
-        person
+        <div onClick={props.click}>
+            {person}
+        </div>
     );
 }
 
