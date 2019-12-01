@@ -31,8 +31,15 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
 
-  nameChangedHandler = () => {
-    
+  nameChangedHandler = (id, event) => {
+    const tmpArr = this.state.persons.slice();
+    const tmpIndex = tmpArr.findIndex(e => e.id === id);
+    if (tmpIndex === -1) {
+      //console.log("Error - index = -1");
+    } else {
+      tmpArr[tmpIndex].name=event.target.value;
+      this.setState({persons: tmpArr});
+    }
   }
 
   deletePerson = (id) => {
@@ -40,7 +47,6 @@ class App extends Component {
     if (personIndex !== -1) {
       const newPersons = this.state.persons.slice();
       newPersons.splice(personIndex,1);
-      console.log('newPersons length: '+newPersons.length);
       this.setState({persons: newPersons});
     }
   }
@@ -50,34 +56,28 @@ class App extends Component {
   render() {
     const displayArr = this.state.persons.slice();
 
-    const iterator = displayArr.entries();
-    const newDisplayArr = [];
-    for(let element of iterator) {
-      newDisplayArr.unshift(...element.slice(1));
-    }
-
     return (
       <div className="App">
         <button onClick={this.togglePersonsHandler}>Show persons</button>
         { this.state.showPersons ? <div>
           <h1>"map" function test with sorting</h1>
-          <Persons click={this.deletePerson} arr={displayArr.sort(this.sortByAge)}></Persons>
+          <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.sort(this.sortByAge)}></Persons>
           <hr></hr>
           <h1>"find" function test, condition: "element.age > 25"</h1>
-          <Persons click={this.deletePerson} arr={[displayArr.find(element => element.age > 25)]}></Persons>
+          <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={[displayArr.find(element => element.age > 25)]}></Persons>
           <hr></hr>
           <h1>"filter" function test, condition: element.age > 25</h1>
-          <Persons click={this.deletePerson} arr={displayArr.filter(element => element.age > 25)}></Persons>
+          <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.filter(element => element.age > 25)}></Persons>
           <hr></hr>
-          <h1>"splice" function test, adding "someOtherPersons"</h1>
+          {/* <h1>"splice" function test, adding "someOtherPersons"</h1>
           {displayArr.splice(displayArr.length,0,...this.someOtherPersons)}
-          <Persons click={this.deletePerson} arr={displayArr}></Persons>
-          <hr></hr>
-          <h1>"entries" test</h1>
-          <Persons click={this.deletePerson} arr={newDisplayArr}></Persons>
+          <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr}></Persons>
+          <hr></hr> */}
+          {/* <h1>"entries" test</h1>
+          <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={newDisplayArr}></Persons>
           <hr></hr>
           <h1>"concat" test</h1>
-          <Persons click={this.deletePerson} arr={newDisplayArr.concat(this.someOtherPersons)}></Persons>
+          <Persons modifyName={this.nameChangedHandler}click={this.deletePerson} arr={newDisplayArr.concat(this.someOtherPersons)}></Persons> */}
         </div> : null }
       </div>
     );
