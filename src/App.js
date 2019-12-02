@@ -11,14 +11,14 @@ class App extends Component {
       {id: '123sfdf', name: 'Max', age: 39, children: 'Rajdy'},
       {id: 'spuydse', name: 'Stefania', age: 25}
     ],
-    otherState: 'Other state value',
-    showPersons: false
+    showPersons: false,
+    debugModeOptions: 'normal verbose',
+    debugMode: 'verbose'
   }
 
   sortPersons = () => {
     const personsArr = this.state.persons.slice();
-    personsArr.sort(this.sortByAge);
-    // console.log(personsArr);
+    personsArr.sort(this.sortByAge); 
     this.setState({persons: personsArr});
   }
 
@@ -35,14 +35,15 @@ class App extends Component {
     const tmpArr = this.state.persons.slice();
     const tmpIndex = tmpArr.findIndex(e => e.id === id);
     if (tmpIndex === -1) {
-      //console.log("Error - index = -1");
+      if(this.state.debugMode === 'verbose')
+        console.log('Warning: App.js:nameChangeHandler:tmpIndex===-1,id='+id);
     } else {
       tmpArr[tmpIndex].name=event.target.value;
       this.setState({persons: tmpArr});
     }
   }
 
-  deletePerson = (id) => {
+  deletePerson = id => {
     const personIndex = this.state.persons.findIndex(element => element.id === id);
     if (personIndex !== -1) {
       const newPersons = this.state.persons.slice();
@@ -63,7 +64,7 @@ class App extends Component {
       cursor: 'pointer'
     }
 
-    const displayArr = this.state.persons.slice();
+    const displayArr = this.state.persons.concat(this.someOtherPersons);
 
     let multiplePersons = null;
 
@@ -79,15 +80,6 @@ class App extends Component {
         <h1>"filter" function test, condition: element.age > 25</h1>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.filter(element => element.age > 25)}></Persons>
         <hr></hr>
-        {/* <h1>"splice" function test, adding "someOtherPersons"</h1>
-        {displayArr.splice(displayArr.length,0,...this.someOtherPersons)}
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr}></Persons>
-        <hr></hr> */}
-        {/* <h1>"entries" test</h1>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={newDisplayArr}></Persons>
-        <hr></hr>
-        <h1>"concat" test</h1>
-        <Persons modifyName={this.nameChangedHandler}click={this.deletePerson} arr={newDisplayArr.concat(this.someOtherPersons)}></Persons> */}
       </div>
       );
     }
