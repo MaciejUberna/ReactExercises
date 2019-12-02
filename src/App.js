@@ -56,13 +56,16 @@ class App extends Component {
   
   render() {
 
-    const style = {
-      backgroundColor: 'white',
+    const toggleButtonStyle = {
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
     }
+
+    let toggleButtonText = 'Pokaż ziomków';
 
     const displayArr = this.state.persons.concat(this.someOtherPersons);
 
@@ -82,11 +85,14 @@ class App extends Component {
         <hr></hr>
       </div>
       );
+
+      toggleButtonStyle.backgroundColor = 'red';
+      toggleButtonText = 'Ukryj ziomków';
     }
 
     return (
       <div className="App">
-        <button style={style} onClick={this.togglePersonsHandler}>Pokaż ziomków</button>
+        <button style={toggleButtonStyle} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
         {multiplePersons}
       </div>
     );
