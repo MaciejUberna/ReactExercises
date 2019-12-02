@@ -36,7 +36,7 @@ class App extends Component {
     const tmpIndex = tmpArr.findIndex(e => e.id === id);
     if (tmpIndex === -1) {
       if(this.state.debugMode === 'verbose')
-        console.log('Warning: App.js:nameChangeHandler:tmpIndex===-1,id='+id);
+        console.warn('Warning: App.js:nameChangeHandler:tmpIndex===-1,id='+id);
     } else {
       tmpArr[tmpIndex].name=event.target.value;
       this.setState({persons: tmpArr});
@@ -70,10 +70,24 @@ class App extends Component {
     const displayArr = this.state.persons.concat(this.someOtherPersons);
 
     let multiplePersons = null;
+    let styleClasses = [];
+
+    if(this.state.persons.length <= 2)
+      if(styleClasses.findIndex(e => e === 'red')===-1)
+        styleClasses.push('red');
+    else 
+       styleClasses.splice(styleClasses.findIndex(e => e === 'red'),1);
+
+    if(this.state.persons.length <= 1)
+       if(styleClasses.findIndex(e => e === 'bold')===-1)
+         styleClasses.push('bold');
+    else 
+        styleClasses.splice(styleClasses.findIndex(e => e === 'bold'),1);
+
 
     if (this.state.showPersons) {
       multiplePersons = (
-        <div>
+        <div className={styleClasses.join(' ')}>
         <h1>"map" function test with sorting</h1>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.sort(this.sortByAge)}></Persons>
         <hr></hr>
