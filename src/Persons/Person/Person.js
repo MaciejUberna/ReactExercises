@@ -3,7 +3,12 @@ import Radium from 'radium';
 import './Person.css'
 
 const Person = (props) => {
-
+    //style mediaquery for radium
+    const style = {
+        '@media (min-width: 500px)': {
+            width: '450px'
+        }
+    }
     let person = [];
     person.push(<p key={props.id.concat('1')}> Nazywam się {props.name} i mam {props.age} lat.</p>);
     if ( props.children ) {
@@ -11,7 +16,7 @@ const Person = (props) => {
     }
     person.push(<input key={props.id.concat('3')} type="text" onChange={props.modifyName} value={props.name}/>)
     return (
-        <div className="Person" onClick={props.click}>
+        <div className="Person" style={style} onClick={props.click}>
             {person}
         </div>
     );
