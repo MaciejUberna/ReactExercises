@@ -9,14 +9,14 @@ import './App.css';
 
 const StyledButton = styled.button`
 
-     background-color: green;
+     background-color: ${props => props.visiblePersons ? 'red' : 'green'};
      color: white;
      font: inherit;
      border: 1px solid blue;
      padding: 8px;
      cursor: pointer;
      &:hover {
-      background-color: lightgreen;
+      background-color: ${props => props.visiblePersons ? 'salmon' : 'lightgreen'};
       color: black;
      }
 
@@ -152,7 +152,7 @@ class App extends Component {
 
     return (
         <div className="App">
-          <StyledButton onClick={this.togglePersonsHandler}>{toggleButtonText}</StyledButton>
+          <StyledButton visiblePersons={this.state.showPersons} onClick={this.togglePersonsHandler}>{toggleButtonText}</StyledButton>
           {multiplePersons}
         </div>
     );
