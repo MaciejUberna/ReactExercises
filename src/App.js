@@ -16,6 +16,17 @@ class App extends Component {
     debugMode: 'verbose'
   }
 
+  addStyleToClass = (classArray,newClassString) => {
+    if(classArray.findIndex(e => e === newClassString)===-1)
+      classArray.push(newClassString);
+  }
+
+  removeStyleFromClass = (classArray,stringToRemove) => {
+    const index = classArray.findIndex(e => e === stringToRemove);
+    if(index !== -1)
+      classArray.splice(index,1);
+  }
+
   sortPersons = () => {
     const personsArr = this.state.persons.slice();
     personsArr.sort(this.sortByAge); 
@@ -32,14 +43,19 @@ class App extends Component {
   }
 
   nameChangedHandler = (id, event) => {
-    const tmpArr = this.state.persons.slice();
-    const tmpIndex = tmpArr.findIndex(e => e.id === id);
-    if (tmpIndex === -1) {
+    const copiedArrayReferencesOfPersons = this.state.persons.slice();
+    const personIndex = copiedArrayReferencesOfPersons.findIndex(e => e.id === id);
+    if (personIndex === -1) {
       if(this.state.debugMode === 'verbose')
-        console.warn('Warning: App.js:nameChangeHandler:tmpIndex===-1,id='+id);
+        console.warn('Warning: App.js:nameChangeHandler:personIndex===-1,id='+id);
     } else {
-      tmpArr[tmpIndex].name=event.target.value;
-      this.setState({persons: tmpArr});
+      //const copiedPerson = {...this.state.persons[personIndex]};
+      const copiedPerson = Object.assign({},this.state.persons[personIndex]);
+      copiedPerson.name = event.target.value; 
+
+      copiedArrayReferencesOfPersons[personIndex] = copiedPerson;
+
+      this.setState({persons: copiedArrayReferencesOfPersons});
     }
   }
 
@@ -73,16 +89,14 @@ class App extends Component {
     let styleClasses = [];
 
     if(this.state.persons.length <= 2)
-      if(styleClasses.findIndex(e => e === 'red')===-1)
-        styleClasses.push('red');
+      this.addStyleToClass(styleClasses,'red');
     else 
-       styleClasses.splice(styleClasses.findIndex(e => e === 'red'),1);
+      this.removeStyleFromClass(styleClasses,'red');
 
     if(this.state.persons.length <= 1)
-       if(styleClasses.findIndex(e => e === 'bold')===-1)
-         styleClasses.push('bold');
+      this.addStyleToClass(styleClasses,'bold');
     else 
-        styleClasses.splice(styleClasses.findIndex(e => e === 'bold'),1);
+      this.removeStyleFromClass(styleClasses,'bold');
 
 
     if (this.state.showPersons) {
