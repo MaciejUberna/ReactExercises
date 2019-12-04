@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import Persons from './Persons/Persons';
 
 import './App.css';
@@ -69,6 +70,8 @@ class App extends Component {
   }
 
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
+  //Radium: npm install --save radium
+  //Upgrade npm: npm install -g npm
   
   render() {
 
@@ -127,4 +130,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
