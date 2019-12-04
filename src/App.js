@@ -1,7 +1,7 @@
 //www.styled-components.com: npm install --save styled-components got rid of radium
 //Radium: npm install --save radium
 import React, { Component } from 'react';
-// import Radium, { StyleRoot } from 'radium';
+import Radium from 'radium';
 import Persons from './Persons/Persons';
 
 import './App.css';
