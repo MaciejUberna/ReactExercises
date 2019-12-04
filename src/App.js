@@ -1,6 +1,6 @@
 //Radium: npm install --save radium
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import Persons from './Persons/Persons';
 
 import './App.css';
@@ -132,10 +132,12 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <button style={toggleButtonStyle} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
-        {multiplePersons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <button style={toggleButtonStyle} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
+          {multiplePersons}
+        </div>
+      </StyleRoot>
     );
   }
 }
