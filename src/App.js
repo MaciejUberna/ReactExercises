@@ -1,11 +1,26 @@
 //www.styled-components.com: npm install --save styled-components got rid of radium
+import styled from 'styled-components';
 //Radium: npm install --save radium
 import React, { Component } from 'react';
-import Radium from 'radium';
+//import Radium from 'radium';
 import Persons from './Persons/Persons';
 
 import './App.css';
 
+const StyledButton = styled.button`
+
+     background-color: green;
+     color: white;
+     font: inherit;
+     border: 1px solid blue;
+     padding: 8px;
+     cursor: pointer;
+     &:hover {
+      background-color: lightgreen;
+      color: black;
+     }
+
+`;
 
 class App extends Component {
   state = {
@@ -77,18 +92,19 @@ class App extends Component {
   
   render() {
 
-    const toggleButtonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
+    //redium styles
+    // const toggleButtonStyle = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black'
+    //   }
+    // }
 
     let toggleButtonText = 'Pokaż ziomków';
 
@@ -123,22 +139,25 @@ class App extends Component {
       </div>
       );
 
-      toggleButtonStyle.backgroundColor = 'red';
-      toggleButtonStyle.color = 'white';
-      toggleButtonStyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+
+      // removed radium styles formatting
+      // toggleButtonStyle.backgroundColor = 'red';
+      // toggleButtonStyle.color = 'white';
+      // toggleButtonStyle[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // };
       toggleButtonText = 'Ukryj ziomków';
     }
 
     return (
         <div className="App">
-          <button style={toggleButtonStyle} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
+          <StyledButton onClick={this.togglePersonsHandler}>{toggleButtonText}</StyledButton>
           {multiplePersons}
         </div>
     );
   }
 }
 
-export default Radium(App);
+//export default Radium(App);
+export default App;
