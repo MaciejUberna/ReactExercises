@@ -1,3 +1,4 @@
+//Radium: npm install --save radium
 import React, { Component } from 'react';
 import Radium from 'radium';
 import Persons from './Persons/Persons';
@@ -81,7 +82,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let toggleButtonText = 'Pokaż ziomków';
@@ -118,6 +123,11 @@ class App extends Component {
       );
 
       toggleButtonStyle.backgroundColor = 'red';
+      toggleButtonStyle.color = 'white';
+      toggleButtonStyle[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
       toggleButtonText = 'Ukryj ziomków';
     }
 
