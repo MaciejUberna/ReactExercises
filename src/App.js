@@ -1,6 +1,7 @@
+//www.styled-components.com: npm install --save styled-components got rid of radium
 //Radium: npm install --save radium
 import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 import Persons from './Persons/Persons';
 
 import './App.css';
@@ -132,12 +133,10 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
         <div className="App">
           <button style={toggleButtonStyle} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
           {multiplePersons}
         </div>
-      </StyleRoot>
     );
   }
 }
