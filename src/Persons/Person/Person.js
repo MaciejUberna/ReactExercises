@@ -33,7 +33,7 @@ const Person = (props) => {
     return (
         //radium div
         // <div className="Person" style={style} onClick={props.click}>
-        <StyledDiv>
+        <StyledDiv onClick={props.click}>
             {person}
         </StyledDiv>
         // </div>
