@@ -7,20 +7,22 @@ import Persons from './Persons/Persons';
 
 import './App.css';
 
+const styledButtonBackgroundColor = ['green','red','gold'];
+const styledButtonHoverColor = ['lightgreen','salmon','yellow']
 const StyledButton = styled.button`
-
-     background-color: ${props => props.visiblePersons ? 'red' : 'green'};
+     background-color: ${p => (styledButtonBackgroundColor[p.personState]) };
      color: white;
      font: inherit;
      border: 1px solid blue;
      padding: 8px;
      cursor: pointer;
      &:hover {
-      background-color: ${props => props.visiblePersons ? 'salmon' : 'lightgreen'};
+      background-color: ${p => (styledButtonHoverColor[p.personState])};
       color: black;
      }
-
 `;
+
+
 
 class App extends Component {
   state = {
@@ -29,7 +31,7 @@ class App extends Component {
       {id: '123sfdf', name: 'Max', age: 39, children: 'Rajdy'},
       {id: 'spuydse', name: 'Stefania', age: 25}
     ],
-    showPersons: false,
+    personState: 0,
     debugModeOptions: 'normal verbose',
     debugMode: 'verbose'
   }
@@ -55,9 +57,18 @@ class App extends Component {
     return a.age - b.age;
   }
 
+  toggleActivePersonsHandler = () => {
+    if(this.state.persons.length <= 2)
+      this.setState({personState: 2});
+    else
+      this.setState({personState: 1});
+  }
+
   togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    if (this.state.personState > 0)
+      this.setState({personState: 0});
+    else
+      this.toggleActivePersonsHandler();
   }
 
   nameChangedHandler = (id, event) => {
@@ -83,6 +94,7 @@ class App extends Component {
       const newPersons = this.state.persons.slice();
       newPersons.splice(personIndex,1);
       this.setState({persons: newPersons});
+      this.toggleActivePersonsHandler();
     }
   }
 
@@ -113,8 +125,9 @@ class App extends Component {
     let multiplePersons = null;
     let styleClasses = [];
 
-    if(this.state.persons.length <= 2)
+    if(this.state.persons.length <= 2) {
       this.addStyleToClass(styleClasses,'red');
+    }
     else 
       this.removeStyleFromClass(styleClasses,'red');
 
@@ -124,7 +137,7 @@ class App extends Component {
       this.removeStyleFromClass(styleClasses,'bold');
 
 
-    if (this.state.showPersons) {
+    if (this.state.personState > 0) {
       multiplePersons = (
         <div className={styleClasses.join(' ')}>
         <h1>"map" function test with sorting</h1>
@@ -152,7 +165,7 @@ class App extends Component {
 
     return (
         <div className="App">
-          <StyledButton visiblePersons={this.state.showPersons} onClick={this.togglePersonsHandler}>{toggleButtonText}</StyledButton>
+          <StyledButton personState={this.state.personState} onClick={this.togglePersonsHandler}>{toggleButtonText}</StyledButton>
           {multiplePersons}
         </div>
     );
