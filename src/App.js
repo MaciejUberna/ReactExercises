@@ -123,7 +123,7 @@ class App extends Component {
 
     return (
         <div className="App">
-          <button onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
+          <button className="button" onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
           {multiplePersons}
         </div>
     );
