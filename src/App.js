@@ -1,23 +1,7 @@
-import styled from 'styled-components';
 import React, { Component } from 'react';
 import Persons from './Persons/Persons';
 
 import './App.css';
-
-const styledButtonBackgroundColor = ['green','red','gold'];
-const styledButtonHoverColor = ['lightgreen','salmon','yellow']
-const StyledButton = styled.button`
-     background-color: ${p => (styledButtonBackgroundColor[p.personState]) };
-     color: white;
-     font: inherit;
-     border: 1px solid blue;
-     padding: 8px;
-     cursor: pointer;
-     &:hover {
-      background-color: ${p => (styledButtonHoverColor[p.personState])};
-      color: black;
-     }
-`;
 
 
 
@@ -139,7 +123,7 @@ class App extends Component {
 
     return (
         <div className="App">
-          <StyledButton personState={this.state.personState} onClick={this.togglePersonsHandler}>{toggleButtonText}</StyledButton>
+          <button onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
           {multiplePersons}
         </div>
     );
