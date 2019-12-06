@@ -1,8 +1,5 @@
-//www.styled-components.com: npm install --save styled-components got rid of radium
 import styled from 'styled-components';
-//Radium: npm install --save radium
 import React, { Component } from 'react';
-//import Radium from 'radium';
 import Persons from './Persons/Persons';
 
 import './App.css';
@@ -99,24 +96,8 @@ class App extends Component {
   }
 
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
-  //Radium: npm install --save radium
-  //Upgrade npm: npm install -g npm
   
   render() {
-
-    //redium styles
-    // const toggleButtonStyle = {
-    //   backgroundColor: 'green',
-    //   color: 'white',
-    //   font: 'inherit',
-    //   border: '1px solid blue',
-    //   padding: '8px',
-    //   cursor: 'pointer',
-    //   ':hover': {
-    //     backgroundColor: 'lightgreen',
-    //     color: 'black'
-    //   }
-    // }
 
     let toggleButtonText = 'Pokaż ziomków';
 
@@ -153,13 +134,6 @@ class App extends Component {
       );
 
 
-      // removed radium styles formatting
-      // toggleButtonStyle.backgroundColor = 'red';
-      // toggleButtonStyle.color = 'white';
-      // toggleButtonStyle[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // };
       toggleButtonText = 'Ukryj ziomków';
     }
 
@@ -171,6 +145,4 @@ class App extends Component {
     );
   }
 }
-
-//export default Radium(App);
 export default App;
