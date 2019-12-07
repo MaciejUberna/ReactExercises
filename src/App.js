@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Persons from './Persons/Persons';
-
-import './App.css';
+import moduleClasses from './App.module.css';
 
 
 
@@ -84,6 +83,7 @@ class App extends Component {
   render() {
 
     let toggleButtonText = 'Pokaż ziomków';
+    let toggleButtonCssClasses = [moduleClasses.Button];
 
     const displayArr = this.state.persons.concat(this.someOtherPersons);
 
@@ -91,15 +91,15 @@ class App extends Component {
     let styleClasses = [];
 
     if(this.state.persons.length <= 2) {
-      this.addStyleToClass(styleClasses,'red');
+      this.addStyleToClass(styleClasses,moduleClasses.red);
     }
     else 
-      this.removeStyleFromClass(styleClasses,'red');
+      this.removeStyleFromClass(styleClasses,moduleClasses.red);
 
     if(this.state.persons.length <= 1)
-      this.addStyleToClass(styleClasses,'bold');
+      this.addStyleToClass(styleClasses,moduleClasses.bold);
     else 
-      this.removeStyleFromClass(styleClasses,'bold');
+      this.removeStyleFromClass(styleClasses,moduleClasses.bold);
 
 
     if (this.state.personState > 0) {
@@ -116,14 +116,21 @@ class App extends Component {
         <hr></hr>
       </div>
       );
-
-
       toggleButtonText = 'Ukryj ziomków';
+      if (this.state.personState === 1) {
+        this.removeStyleFromClass(toggleButtonCssClasses,moduleClasses.Yellow);
+        this.addStyleToClass(toggleButtonCssClasses,moduleClasses.Red);
+      } else if (this.state.personState === 2) {
+        this.removeStyleFromClass(toggleButtonCssClasses,moduleClasses.Red);
+        this.addStyleToClass(toggleButtonCssClasses,moduleClasses.Yellow);
+      } else {
+        console.error("Error: App.js:render():unknown this.state.personState="+this.state.personState);
+      }
     }
 
     return (
-        <div className="App">
-          <button className="button" onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
+        <div className={moduleClasses.App}>
+          <button className={toggleButtonCssClasses.join(' ')} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
           {multiplePersons}
         </div>
     );
