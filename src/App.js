@@ -11,8 +11,9 @@ class App extends Component {
       {id: '123sfdf', name: 'Max', age: 39, children: 'Rajdy'},
       {id: 'spuydse', name: 'Stefania', age: 25}
     ],
-    personState: 0,
-    debugModeOptions: 'normal verbose',
+    personStateOptions: ['hiddenPersons','mannyPersons','lessThan3Persons'],
+    personState: 'hiddenPersons',
+    debugModeOptions: ['normal', 'verbose'],
     debugMode: 'verbose'
   }
 
@@ -39,14 +40,14 @@ class App extends Component {
 
   toggleActivePersonsHandler = () => {
     if(this.state.persons.length <= 2)
-      this.setState({personState: 2});
+      this.setState({personState: 'lessThan3Persons'});
     else
-      this.setState({personState: 1});
+      this.setState({personState: 'mannyPersons'});
   }
 
   togglePersonsHandler = () => {
-    if (this.state.personState > 0)
-      this.setState({personState: 0});
+    if (this.state.personState !== 'hiddenPersons')
+      this.setState({personState: 'hiddenPersons'});
     else
       this.toggleActivePersonsHandler();
   }
@@ -102,7 +103,7 @@ class App extends Component {
       this.removeStyleFromClass(styleClasses,moduleClasses.bold);
 
 
-    if (this.state.personState > 0) {
+    if (this.state.personState !== 'hiddenPersons') {
       multiplePersons = (
         <div className={styleClasses.join(' ')}>
         <h1>"map" function test with sorting</h1>
@@ -117,10 +118,10 @@ class App extends Component {
       </div>
       );
       toggleButtonText = 'Ukryj ziomków';
-      if (this.state.personState === 1) {
+      if (this.state.personState === 'mannyPersons') {
         this.removeStyleFromClass(toggleButtonCssClasses,moduleClasses.Yellow);
         this.addStyleToClass(toggleButtonCssClasses,moduleClasses.Red);
-      } else if (this.state.personState === 2) {
+      } else if (this.state.personState === 'lessThan3Persons') {
         this.removeStyleFromClass(toggleButtonCssClasses,moduleClasses.Red);
         this.addStyleToClass(toggleButtonCssClasses,moduleClasses.Yellow);
       } else {
