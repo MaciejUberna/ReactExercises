@@ -84,7 +84,7 @@ class App extends Component {
   render() {
 
     let toggleButtonText = 'Pokaż ziomków';
-    let toggleButtonCssClasses = [moduleClasses.Button];
+    let toggleButtonCssClasses = '';
 
     const displayArr = this.state.persons.concat(this.someOtherPersons);
 
@@ -119,11 +119,9 @@ class App extends Component {
       );
       toggleButtonText = 'Ukryj ziomków';
       if (this.state.personState === 'mannyPersons') {
-        this.removeStyleFromClass(toggleButtonCssClasses,moduleClasses.Yellow);
-        this.addStyleToClass(toggleButtonCssClasses,moduleClasses.Red);
+        toggleButtonCssClasses = moduleClasses.Red;
       } else if (this.state.personState === 'lessThan3Persons') {
-        this.removeStyleFromClass(toggleButtonCssClasses,moduleClasses.Red);
-        this.addStyleToClass(toggleButtonCssClasses,moduleClasses.Yellow);
+        toggleButtonCssClasses = moduleClasses.Yellow;
       } else {
         console.error("Error: App.js:render():unknown this.state.personState="+this.state.personState);
       }
@@ -131,7 +129,7 @@ class App extends Component {
 
     return (
         <div className={moduleClasses.App}>
-          <button className={toggleButtonCssClasses.join(' ')} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
+          <button className={toggleButtonCssClasses} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
           {multiplePersons}
         </div>
     );
