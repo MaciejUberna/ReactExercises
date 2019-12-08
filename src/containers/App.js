@@ -86,8 +86,6 @@ class App extends Component {
     let toggleButtonText = 'Pokaż ziomków';
     let toggleButtonCssClasses = '';
 
-    const displayArr = this.state.persons.concat(this.someOtherPersons);
-
     let multiplePersons = null;
     let styleClasses = [];
 
@@ -107,13 +105,13 @@ class App extends Component {
       multiplePersons = (
         <div className={styleClasses.join(' ')}>
         <h1>"map" function test with sorting</h1>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.sort(this.sortByAge)}></Persons>
+        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.sort(this.sortByAge)}></Persons>
         <hr></hr>
         <h1>"find" function test, condition: "element.age > 25"</h1>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={[displayArr.find(element => element.age > 25)]}></Persons>
+        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={[this.state.persons.find(element => element.age > 25)]}></Persons>
         <hr></hr>
         <h1>"filter" function test, condition: element.age > 25</h1>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={displayArr.filter(element => element.age > 25)}></Persons>
+        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.filter(element => element.age > 25)}></Persons>
         <hr></hr>
       </div>
       );
