@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
-import moduleClasses from './App.module.css';
-
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -9,7 +8,8 @@ class App extends Component {
     persons: [
       {id: 'sfsdfgw', name: 'Maciek', age: 27},
       {id: '123sfdf', name: 'Max', age: 39, children: 'Rajdy'},
-      {id: 'spuydse', name: 'Stefania', age: 25}
+      {id: 'spuydse', name: 'Stefania', age: 25},
+      {id: 'grspq40', name: 'Manu', age: 43, children: 'Gry planszowe'}
     ],
     personStateOptions: ['hiddenPersons','mannyPersons','lessThan3Persons'],
     personState: 'hiddenPersons',
@@ -17,25 +17,12 @@ class App extends Component {
     debugMode: 'verbose'
   }
 
-  addStyleToClass = (classArray,newClassString) => {
-    if(classArray.findIndex(e => e === newClassString)===-1)
-      classArray.push(newClassString);
-  }
-
-  removeStyleFromClass = (classArray,stringToRemove) => {
-    const index = classArray.findIndex(e => e === stringToRemove);
-    if(index !== -1)
-      classArray.splice(index,1);
-  }
-
-  sortPersons = () => {
-    const personsArr = this.state.persons.slice();
-    personsArr.sort(this.sortByAge); 
-    this.setState({persons: personsArr});
-  }
-
   sortByAge = (a,b) => {
     return a.age - b.age;
+  }
+
+  sortById = (a,b) => {
+    return a.id - b.id;
   }
 
   toggleActivePersonsHandler = () => {
@@ -83,53 +70,28 @@ class App extends Component {
   
   render() {
 
-    let toggleButtonText = 'Pokaż ziomków';
-    let toggleButtonCssClasses = '';
-
-    let multiplePersons = null;
-    let styleClasses = [];
-
-    if(this.state.persons.length <= 2) {
-      this.addStyleToClass(styleClasses,moduleClasses.red);
-    }
-    else 
-      this.removeStyleFromClass(styleClasses,moduleClasses.red);
-
-    if(this.state.persons.length <= 1)
-      this.addStyleToClass(styleClasses,moduleClasses.bold);
-    else 
-      this.removeStyleFromClass(styleClasses,moduleClasses.bold);
-
-
-    if (this.state.personState !== 'hiddenPersons') {
-      multiplePersons = (
-        <div className={styleClasses.join(' ')}>
-        <h1>"map" function test with sorting</h1>
+    const  multiplePersons = (
+      <div>
+        <h2>"map" function test with sorting</h2>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.sort(this.sortByAge)}></Persons>
         <hr></hr>
-        <h1>"find" function test, condition: "element.age > 25"</h1>
+        <h2>"find" function test, condition: "element.age > 25"</h2>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={[this.state.persons.find(element => element.age > 25)]}></Persons>
         <hr></hr>
-        <h1>"filter" function test, condition: element.age > 25</h1>
+        <h2>"filter" function test, condition: element.age > 25</h2>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.filter(element => element.age > 25)}></Persons>
         <hr></hr>
       </div>
       );
-      toggleButtonText = 'Ukryj ziomków';
-      if (this.state.personState === 'mannyPersons') {
-        toggleButtonCssClasses = moduleClasses.Red;
-      } else if (this.state.personState === 'lessThan3Persons') {
-        toggleButtonCssClasses = moduleClasses.Yellow;
-      } else {
-        console.error("Error: App.js:render():unknown this.state.personState="+this.state.personState);
-      }
-    }
 
     return (
-        <div className={moduleClasses.App}>
-          <button className={toggleButtonCssClasses} onClick={this.togglePersonsHandler}>{toggleButtonText}</button>
-          {multiplePersons}
-        </div>
+          <Cockpit 
+            persons={this.state.persons} 
+            personState={this.state.personState}
+            click={this.togglePersonsHandler}
+          >
+            {multiplePersons}
+          </Cockpit>
     );
   }
 }
