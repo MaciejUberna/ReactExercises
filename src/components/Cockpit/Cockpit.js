@@ -43,7 +43,7 @@ const cockpit = (props) => {
 
     return (
         <div className={personStyleClasses.join(' ')}>
-            <h1> Kokpit </h1>
+            <h1> {props.title} </h1>
             <button className={toggleButtonCssClasses} onClick={props.click}>{toggleButtonText}</button>
             {content}
         </div>
