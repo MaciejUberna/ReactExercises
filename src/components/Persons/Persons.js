@@ -14,8 +14,9 @@ class Persons extends Component {
         return true;
     }
 
-    getSnapshotBeforeUpadte(prevProps,precState){
-        console.log('[Persons.js getSnapshotBeforeUpadte')
+    getSnapshotBeforeUpdate(prevProps,precState){
+        console.log('[Persons.js getSnapshotBeforeUpdate');
+        return { message: 'Snapshot!' };
     }
 
     render () {
@@ -27,8 +28,9 @@ class Persons extends Component {
     }));
     }
 
-    componentDidUpdate() {
-        console.log('[Persons.js] componentDidUpdate')
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot);
     }
 }
 
