@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import Person from './Person/Person';
 
 class Persons extends Component {
-    static getDerivedStateFromProps(props,state) {
-        console.log('[Persons.js] getDerivedStateFromProps props:',props);
-        return state;
-    }
+    //Warning because we do not do anything with state
+    // static getDerivedStateFromProps(props,state) {
+    //     console.log('[Persons.js] getDerivedStateFromProps props:',props);
+    //     return state;
+    // }
 
     //doing nothing is not an option. This have to return true or false
     shouldComponentUpdate(nextProps, nextState) {
