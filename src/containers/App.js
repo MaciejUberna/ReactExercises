@@ -4,6 +4,26 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps',props);
+    return state;
+  }
+
+  // Will be removed.
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount')
+  // }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+
   state = {
     persons: [
       {id: 'sfsdfgw', name: 'Maciek', age: 27},
@@ -69,7 +89,7 @@ class App extends Component {
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
   
   render() {
-
+    console.log('[App.js] render')
     const  multiplePersons = (
       <div>
         <h2>"map" function test with sorting</h2>
