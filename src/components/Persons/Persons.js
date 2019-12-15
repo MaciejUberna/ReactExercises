@@ -8,6 +8,13 @@ class Persons extends Component {
     //     return state;
     // }
 
+    //Depricated
+    // componentWillReceiveProps(props) {
+    //     console.log('[Persons.js] componentWillReceiveProps',props);
+    // }
+
+    // componentWillUpdate - depricated
+
     //doing nothing is not an option. This have to return true or false
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
