@@ -13,11 +13,15 @@ class Persons extends Component {
     //     console.log('[Persons.js] componentWillReceiveProps',props);
     // }
 
-    // componentWillUpdate - depricated
+    // componentWillUpdate - depricated not recomended to use
+    // componentWillUpdate() {
+
+    // }
 
     //doing nothing is not an option. This have to return true or false
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
+        // it updates everythink if true
         return true;
     }
 

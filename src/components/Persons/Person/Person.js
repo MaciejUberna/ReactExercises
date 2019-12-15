@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './Person.module.css'
 
 class Person extends Component {
+
     render () {
         console.log('[Person.js] rendering...');
         let person = [];
@@ -15,6 +16,14 @@ class Person extends Component {
                 {person}
             </div>
         )
+    }
+
+    getSnapshotBeforeUpdate() {
+        return {message: 'Snapshot: Person.js!'};
+    }
+
+    componentDidUpdate() {
+        console.log('[Person.js] componentDidUpdate')
     }
 }
 
