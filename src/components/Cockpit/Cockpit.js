@@ -16,10 +16,14 @@ const removeStyleFromClass = (classArray,stringToRemove) => {
 const Cockpit = (props) => {
 
     //Runs for every update
+    //Combines componentDidMount and componentDidUpdate
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         //Http request...
-    });
+        setTimeout(()=>{
+            alert('Saved data to cloud.')
+        },1000)
+    },[props.persons]);
 
     let toggleButtonText = 'Pokaż ziomków';
     let toggleButtonCssClasses = '';
