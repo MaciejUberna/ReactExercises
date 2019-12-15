@@ -46,7 +46,8 @@ class App extends Component {
     personStateOptions: ['hiddenPersons','mannyPersons','lessThan3Persons'],
     personState: 'hiddenPersons',
     debugModeOptions: ['normal', 'verbose'],
-    debugMode: 'verbose'
+    debugMode: 'verbose',
+    showCockpit: true
   }
 
   sortByAge = (a,b) => {
@@ -117,14 +118,21 @@ class App extends Component {
       );
 
     return (
-          <Cockpit 
-            title={this.props.appTitle}
-            persons={this.state.persons} 
-            personState={this.state.personState}
-            click={this.togglePersonsHandler}
-          >
-            {multiplePersons}
-          </Cockpit>
+          <div>
+            <button onClick={
+              () => {this.setState({showCockpit: false})}
+            }>
+              Remove cockpit
+            </button>
+            {this.state.showCockpit ? <Cockpit 
+              title={this.props.appTitle}
+              persons={this.state.persons} 
+              personState={this.state.personState}
+              click={this.togglePersonsHandler}
+            >
+              {multiplePersons}
+            </Cockpit> : null }
+          </div>
     );
   }
 }

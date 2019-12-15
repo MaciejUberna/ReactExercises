@@ -18,12 +18,26 @@ const Cockpit = (props) => {
     //Runs for every update
     //Combines componentDidMount and componentDidUpdate
     useEffect(() => {
-        console.log('[Cockpit.js] useEffect');
+        console.log('[Cockpit.js] First useEffect');
         //Http request...
         setTimeout(()=>{
             alert('Saved data to cloud.')
         },1000)
-    },[]);
+        //It runs BEFORE the main useEffect function runs, but After the (first) render cycle.
+        return () => {
+            console.log('[Cockpis.js] cleanup work in first useEffect!');
+        };
+    },[]); //[] when component is destroyed.
+    // Clean up work will be executed when component is rendered and then unMounted because of [] param
+
+
+    //It is handy whenever you have operation that should be canceled when re-rendered.
+    useEffect( () => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        return () => {
+            console.log('[Cockpis.js] cleanup work in 2nd useEffect!');
+        };
+    });
 
     let toggleButtonText = 'Pokaż ziomków';
     let toggleButtonCssClasses = '';
