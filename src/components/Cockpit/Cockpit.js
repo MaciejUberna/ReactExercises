@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moduleClasses from './Cockpit.module.css'
 
 const addStyleToClass = (classArray,newClassString) => {
@@ -12,7 +12,14 @@ const removeStyleFromClass = (classArray,stringToRemove) => {
       classArray.splice(index,1);
 }
 
-const cockpit = (props) => {
+//Cockpit name MUST begin with capital letter so is in export default in order to use useEffect hook.
+const Cockpit = (props) => {
+
+    //Runs for every update
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+        //Http request...
+    });
 
     let toggleButtonText = 'Pokaż ziomków';
     let toggleButtonCssClasses = '';
@@ -50,4 +57,4 @@ const cockpit = (props) => {
     );
 };
 
-export default cockpit;
+export default Cockpit;
