@@ -20,11 +20,12 @@ const Cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js] First useEffect');
         //Http request...
-        setTimeout(()=>{
+        const timer = setTimeout(()=>{
             alert('Saved data to cloud.')
         },1000)
         //It runs BEFORE the main useEffect function runs, but After the (first) render cycle.
         return () => {
+            clearTimeout(timer);
             console.log('[Cockpis.js] cleanup work in first useEffect!');
         };
     },[]); //[] when component is destroyed.
