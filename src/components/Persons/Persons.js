@@ -21,8 +21,14 @@ class Persons extends Component {
     //doing nothing is not an option. This have to return true or false
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
-        // it updates everythink if true
-        return true;
+        //it updates everythink if true
+        if(nextProps.arr !== this.props.arr){
+            return true;
+          } else {
+            console.log('nextProps.arr:'+nextProps.arr+'this.props:'+this.props.arr);
+            return false;
+          }
+        //return true;
     }
 
     getSnapshotBeforeUpdate(prevProps,precState){

@@ -53,7 +53,7 @@ const Cockpit = (props) => {
         } else if (props.personState === 'lessThan3Persons') {
           toggleButtonCssClasses = moduleClasses.Yellow;
         } else {
-          console.error("Error: src/components/Cockpit/Cockpit.js:unknown props.personState="+props.personState);
+          console.error("Error: src/components/Cockpit/Cockpit.js:unknown props.personState=",props.personState);
         }
     }
 

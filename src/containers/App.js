@@ -73,19 +73,20 @@ class App extends Component {
   }
 
   nameChangedHandler = (id, event) => {
-    const copiedArrayReferencesOfPersons = this.state.persons.slice();
+    const copiedArrayReferencesOfPersons = [...this.state.persons];
     const personIndex = copiedArrayReferencesOfPersons.findIndex(e => e.id === id);
     if (personIndex === -1) {
       if(this.state.debugMode === 'verbose')
         console.warn('Warning: App.js:nameChangeHandler:personIndex===-1,id='+id);
     } else {
-      //const copiedPerson = {...this.state.persons[personIndex]};
-      const copiedPerson = Object.assign({},this.state.persons[personIndex]);
+      const copiedPerson = {...this.state.persons[personIndex]};
+      //const copiedPerson = Object.assign({},this.state.persons[personIndex]);
       copiedPerson.name = event.target.value; 
 
       copiedArrayReferencesOfPersons[personIndex] = copiedPerson;
 
       this.setState({persons: copiedArrayReferencesOfPersons});
+      
     }
   }
 
@@ -102,8 +103,8 @@ class App extends Component {
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
   
   render() {
-    console.log('[App.js] render')
-    const  multiplePersons = (
+    console.log('[App.js] render');
+    const multiplePersons = (
       <div>
         <h2>"map" function test with sorting</h2>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.sort(this.sortByAge)}></Persons>
@@ -114,8 +115,7 @@ class App extends Component {
         <h2>"filter" function test, condition: element.age > 25</h2>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.filter(element => element.age > 25)}></Persons>
         <hr></hr>
-      </div>
-      );
+      </div>);
 
     return (
           <div>
@@ -130,8 +130,9 @@ class App extends Component {
               personState={this.state.personState}
               click={this.togglePersonsHandler}
             >
-              {multiplePersons}
+              {/* {multiplePersons} */}
             </Cockpit> : null }
+            {this.state.personState !== 'hiddenPersons' ? [multiplePersons] : null}     
           </div>
     );
   }
