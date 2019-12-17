@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
     //Warning because we do not do anything with state
     // static getDerivedStateFromProps(props,state) {
     //     console.log('[Persons.js] getDerivedStateFromProps props:',props);
@@ -19,19 +19,19 @@ class Persons extends Component {
     // }
 
     //doing nothing is not an option. This have to return true or false
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[Persons.js] shouldComponentUpdate');
-        //it updates everythink if true
-        if(nextProps.arr !== this.props.arr ||
-            nextProps.modifyName !== this.props.modifyName ||
-            nextProps.click !== this.props.click){
-            return true;
-          } else {
-            console.log('nextProps.arr:'+nextProps.arr+'this.props:'+this.props.arr);
-            return false;
-          }
-        //return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[Persons.js] shouldComponentUpdate');
+    //     //it updates everythink if true
+    //     if(nextProps.arr !== this.props.arr ||
+    //         nextProps.modifyName !== this.props.modifyName ||
+    //         nextProps.click !== this.props.click){
+    //         return true;
+    //       } else {
+    //         console.log('nextProps.arr:'+nextProps.arr+'this.props:'+this.props.arr);
+    //         return false;
+    //       }
+    //     //return true;
+    // }
 
     getSnapshotBeforeUpdate(prevProps,precState){
         console.log('[Persons.js getSnapshotBeforeUpdate');
