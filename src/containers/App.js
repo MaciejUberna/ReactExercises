@@ -105,7 +105,7 @@ class App extends Component {
   render() {
     console.log('[App.js] render');
     const multiplePersons = (
-      <div>
+      <div key="kkkkk">
         <h2>"map" function test with sorting</h2>
         <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.sort(this.sortByAge)}></Persons>
         <hr></hr>
