@@ -22,7 +22,9 @@ class Persons extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
         //it updates everythink if true
-        if(nextProps.arr !== this.props.arr){
+        if(nextProps.arr !== this.props.arr ||
+            nextProps.modifyName !== this.props.modifyName ||
+            nextProps.click !== this.props.click){
             return true;
           } else {
             console.log('nextProps.arr:'+nextProps.arr+'this.props:'+this.props.arr);
