@@ -47,7 +47,7 @@ const Cockpit = (props) => {
 
     if(props.personState !== 'hiddenPersons') {
         toggleButtonText = 'Ukryj ziomków';
-        content = props.children
+        //content = props.children
         if (props.personState === 'mannyPersons') {
           toggleButtonCssClasses = moduleClasses.Red;
         } else if (props.personState === 'lessThan3Persons') {
@@ -57,12 +57,12 @@ const Cockpit = (props) => {
         }
     }
 
-    if(props.persons.length <= 2)
+    if(props.personsLength <= 2)
         addStyleToClass(personStyleClasses,moduleClasses.red);
     else 
         removeStyleFromClass(personStyleClasses,moduleClasses.red);
   
-    if(props.persons.length <= 1)
+    if(props.personsLength <= 1)
         addStyleToClass(personStyleClasses,moduleClasses.bold);
     else 
         removeStyleFromClass(personStyleClasses,moduleClasses.bold);
@@ -76,4 +76,4 @@ const Cockpit = (props) => {
     );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
