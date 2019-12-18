@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Person.module.css'
+import Auxiliary from "../../hoc/Auxliary";
 
 class Person extends Component {
 
@@ -13,7 +14,7 @@ class Person extends Component {
         person.push(<input key={this.props.id.concat('3')} type="text" onChange={this.props.modifyName} value={this.props.name}/>)
         return (
             <div className={classes.Person} onClick={this.props.click}>
-                {person}
+                <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
             </div>
         )
     }
