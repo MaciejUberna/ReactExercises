@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithComponent from '../components/hoc/WithComponent';
+import classes from './App.module.css';
 
 
 class App extends Component {
@@ -118,7 +120,7 @@ class App extends Component {
       </div>);
 
     return (
-          <div>
+          <WithComponent classes={classes.App}>
             <button onClick={
               () => {this.setState({showCockpit: false})}
             }>
@@ -133,7 +135,7 @@ class App extends Component {
               {/* {multiplePersons} */}
             </Cockpit> : null }
             {this.state.personState !== 'hiddenPersons' ? [multiplePersons] : null}     
-          </div>
+          </WithComponent>
     );
   }
 }
