@@ -8,7 +8,10 @@ import withClass from '../../hoc/withClass';
 class Person extends Component {
 
     componentDidMount() {
-        document.querySelector('input').focus();
+        //query selector is a general browser feature
+        //document.querySelector('input').focus();
+
+        this.inputElement.focus();
     }
 
     render () {
@@ -18,7 +21,7 @@ class Person extends Component {
         if ( this.props.children ) {
             person.push(<p key={this.props.id.concat('2')}>A moje hobby to: {this.props.children} </p>);
         }
-        person.push(<input key={this.props.id.concat('3')} type="text" onChange={this.props.modifyName} value={this.props.name}/>)
+        person.push(<input key={this.props.id.concat('3')} ref={(inputEl) => {this.inputElement = inputEl}} type="text" onChange={this.props.modifyName} value={this.props.name}/>)
         return (
             // <div className={classes.Person} onClick={this.props.click}>
                 <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
