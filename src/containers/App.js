@@ -46,6 +46,7 @@ class App extends Component {
       {id: 'spuydse', name: 'Stefania', age: 25},
       {id: 'grspq40', name: 'Manu', age: 43, children: 'Gry planszowe'}
     ],
+    personsStringSymbolChanged: 0,
     personStateOptions: ['hiddenPersons','mannyPersons','lessThan3Persons'],
     personState: 'hiddenPersons',
     debugModeOptions: ['normal', 'verbose'],
@@ -88,10 +89,14 @@ class App extends Component {
 
       copiedArrayReferencesOfPersons[personIndex] = copiedPerson;
 
-      this.setState({persons: copiedArrayReferencesOfPersons});
-      
-    }
+      this.setState( (prevState, props) => {
+        return {
+          persons: copiedArrayReferencesOfPersons,
+          personsStringSymbolChanged: prevState.personsStringSymbolChanged + 1
+        };
+      });
   }
+}
 
   deletePerson = id => {
     const personIndex = this.state.persons.findIndex(element => element.id === id);
