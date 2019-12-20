@@ -41,10 +41,10 @@ class App extends Component {
 
   state = {
     persons: [
-      {id: 'sfsdfgw', name: 'Maciek', age: 27},
-      {id: '123sfdf', name: 'Max', age: 39, children: 'Rajdy'},
-      {id: 'spuydse', name: 'Stefania', age: 25},
-      {id: 'grspq40', name: 'Manu', age: 43, children: 'Gry planszowe'}
+      {id: 'sfsdfgw', name: 'Maciek', age: 27, focus: true},
+      {id: '123sfdf', name: 'Max', age: 39, focus: true, children: 'Rajdy'},
+      {id: 'spuydse', name: 'Stefania', age: 25, focus: false},
+      {id: 'grspq40', name: 'Manu', age: 43, focus: true, children: 'Gry planszowe'}
     ],
     personsStringSymbolChanged: 0,
     personStateOptions: ['hiddenPersons','mannyPersons','lessThan3Persons'],

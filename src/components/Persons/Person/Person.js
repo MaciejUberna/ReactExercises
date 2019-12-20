@@ -18,7 +18,9 @@ class Person extends Component {
 
         //this.inputElement.focus();
 
-        this.inputElementRef.current.focus();
+        //this.inputElementRef.current.focus();
+
+        if(this.props.focus) this.inputElementRef.current.focus();
     }
 
     render () {
@@ -33,11 +35,13 @@ class Person extends Component {
         ref={this.inputElementRef}
         type="text" 
         onChange={this.props.modifyName} 
-        value={this.props.name}/>)
+        value={this.props.name}/>);
+        console.log(this.props.focus);
+        
         return (
-            // <div className={classes.Person} onClick={this.props.click}>
+            <div onClick={this.props.click}>
                 <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
-            // </div>
+            </div>
         )
     }
 
@@ -54,6 +58,7 @@ Person.propTypes = {
     click: PropTypes.func,
     name: PropTypes.string,
     age: PropTypes.number,
+    focus: PropTypes.bool,
     changed: PropTypes.func
 };
 
