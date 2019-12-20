@@ -1,6 +1,6 @@
 import React from 'react';
 
-const withClass = props => (
+const withComponent = props => (
 
     <div className={props.classes}>
 
@@ -10,4 +10,4 @@ const withClass = props => (
 
 );
 
-export default withClass;
+export default withComponent;

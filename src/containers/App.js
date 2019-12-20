@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithComponent from '../components/hoc/WithComponent';
+import withClass from '../components/hoc/withClass';
 import classes from './App.module.css';
+import Auxliary from '../components/hoc/Auxliary.js';
 
 
 class App extends Component {
@@ -120,7 +121,7 @@ class App extends Component {
       </div>);
 
     return (
-          <WithComponent classes={classes.App}>
+          <Auxliary classes={classes.App}>
             <button onClick={
               () => {this.setState({showCockpit: false})}
             }>
@@ -135,8 +136,8 @@ class App extends Component {
               {/* {multiplePersons} */}
             </Cockpit> : null }
             {this.state.personState !== 'hiddenPersons' ? [multiplePersons] : null}     
-          </WithComponent>
+          </Auxliary>
     );
   }
 }
-export default App;
+export default withClass(App,classes.App);
