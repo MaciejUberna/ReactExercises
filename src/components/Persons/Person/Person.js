@@ -14,6 +14,9 @@ class Person extends Component {
         this.inputElementRef = React.createRef();
     }
 
+    //This enables react to connect context with jsx class and see 'context' property behind the scenes
+    static contextType = AuthContext;
+
     componentDidMount() {
         //query selector is a general browser feature
         //document.querySelector('input').focus();
@@ -23,6 +26,9 @@ class Person extends Component {
         //this.inputElementRef.current.focus();
 
         if(this.props.focus) this.inputElementRef.current.focus();
+
+        //Logs all values of contextType
+        console.log('this.context.authenticated: '+this.context.authenticated);
     }
 
     render () {
@@ -42,13 +48,9 @@ class Person extends Component {
         
         return (
             <div onClick={this.props.click}>
-                <AuthContext.Consumer>
-                    {(context) =>
-                        context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>
-                    }
-                </AuthContext.Consumer>
-                {}
-                <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
+            {/* Accessing this context is only available in classes */}
+            { this.context.authenticated ? ( <p>Authenticated</p> ) : ( <p>Please log in</p> ) }
+            <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
             </div>
         )
     }
