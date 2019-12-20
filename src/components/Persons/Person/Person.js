@@ -28,7 +28,7 @@ class Person extends Component {
         if(this.props.focus) this.inputElementRef.current.focus();
 
         //Logs all values of contextType
-        console.log('this.context.authenticated: '+this.context.authenticated);
+        console.log('this.context.authenticated: ',this.context.authenticated);
     }
 
     render () {
