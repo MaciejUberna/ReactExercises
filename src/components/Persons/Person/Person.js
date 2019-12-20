@@ -7,6 +7,10 @@ import withClass from '../../hoc/withClass';
 
 class Person extends Component {
 
+    componentDidMount() {
+        document.querySelector('input').focus();
+    }
+
     render () {
         console.log('[Person.js] rendering...');
         let person = [];
