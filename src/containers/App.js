@@ -51,7 +51,8 @@ class App extends Component {
     personState: 'hiddenPersons',
     debugModeOptions: ['normal', 'verbose'],
     debugMode: 'verbose',
-    showCockpit: true
+    showCockpit: true,
+    authenticated: false
   }
 
   sortByAge = (a,b) => {
@@ -106,7 +107,11 @@ class App extends Component {
       this.setState({persons: newPersons});
       this.toggleActivePersonsHandler();
     }
-  }
+  };
+
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
 
   someOtherPersons = [{id: 'dgfgdgf', name: 'Gosia', age: 41}, {id: 'qeoird', name: 'Marek', age: 39}];
   
@@ -115,13 +120,13 @@ class App extends Component {
     const multiplePersons = (
       <div key="kkkkk">
         <h2>"map" function test with sorting</h2>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.sort(this.sortByAge)}></Persons>
+        <Persons isAuthenticated={this.state.authenticated} modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.sort(this.sortByAge)}></Persons>
         <hr></hr>
         <h2>"find" function test, condition: "element.age > 25"</h2>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={[this.state.persons.find(element => element.age > 25)]}></Persons>
+        <Persons isAuthenticated={this.state.authenticated} modifyName={this.nameChangedHandler} click={this.deletePerson} arr={[this.state.persons.find(element => element.age > 25)]}></Persons>
         <hr></hr>
         <h2>"filter" function test, condition: element.age > 25</h2>
-        <Persons modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.filter(element => element.age > 25)}></Persons>
+        <Persons isAuthenticated={this.state.authenticated} modifyName={this.nameChangedHandler} click={this.deletePerson} arr={this.state.persons.filter(element => element.age > 25)}></Persons>
         <hr></hr>
       </div>);
 
@@ -137,6 +142,7 @@ class App extends Component {
               personsLength={this.state.persons.length} 
               personState={this.state.personState}
               click={this.togglePersonsHandler}
+              login={this.loginHandler}
             >
               {/* {multiplePersons} */}
             </Cockpit> : null }

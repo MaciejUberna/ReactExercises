@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import moduleClasses from './Cockpit.module.css'
 
 const addStyleToClass = (classArray,newClassString) => {
@@ -14,18 +14,20 @@ const removeStyleFromClass = (classArray,stringToRemove) => {
 
 //Cockpit name MUST begin with capital letter so is in export default in order to use useEffect hook.
 const Cockpit = (props) => {
-
+    const toggleBtnRef = useRef(null);
+//  toggleBtnRef.current.click(); -- in here reference to the btn is not added yet so dont use it here
     //Runs for every update
     //Combines componentDidMount and componentDidUpdate
     useEffect(() => {
         console.log('[Cockpit.js] First useEffect');
         //Http request...
-        const timer = setTimeout(()=>{
-            alert('Saved data to cloud.')
-        },1000)
+        // const timer = setTimeout(()=>{
+        //     alert('Saved data to cloud.')
+        // },1000)
+        toggleBtnRef.current.click();
         //It runs BEFORE the main useEffect function runs, but After the (first) render cycle.
         return () => {
-            clearTimeout(timer);
+            //clearTimeout(timer);
             console.log('[Cockpis.js] cleanup work in first useEffect!');
         };
     },[]); //[] when component is destroyed.
@@ -70,7 +72,8 @@ const Cockpit = (props) => {
     return (
         <div className={personStyleClasses.join(' ')}>
             <h1> {props.title} </h1>
-            <button className={toggleButtonCssClasses} onClick={props.click}>{toggleButtonText}</button>
+            <button ref={toggleBtnRef} className={toggleButtonCssClasses} onClick={props.click}>{toggleButtonText}</button>
+            <button onClick={props.login} >Log in</button>
             {content}
         </div>
     );

@@ -40,6 +40,7 @@ class Person extends Component {
         
         return (
             <div onClick={this.props.click}>
+                {this.props.isAuth ? <p>Authenticated</p> : <p>Please log in</p>}
                 <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
             </div>
         )
