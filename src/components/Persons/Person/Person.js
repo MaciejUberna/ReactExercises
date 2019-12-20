@@ -5,6 +5,8 @@ import classes from './Person.module.css'
 import Auxiliary from "../../hoc/Auxliary";
 import withClass from '../../hoc/withClass';
 
+import AuthContext from '../../../Context/auth-context';
+
 class Person extends Component {
 
     constructor(props) {
@@ -40,7 +42,12 @@ class Person extends Component {
         
         return (
             <div onClick={this.props.click}>
-                {this.props.isAuth ? <p>Authenticated</p> : <p>Please log in</p>}
+                <AuthContext.Consumer>
+                    {(context) =>
+                        context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>
+                    }
+                </AuthContext.Consumer>
+                {}
                 <Auxiliary key={this.props.id.concat('11')}>{person}</Auxiliary>
             </div>
         )

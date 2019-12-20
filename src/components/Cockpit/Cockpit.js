@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import moduleClasses from './Cockpit.module.css'
+import moduleClasses from './Cockpit.module.css';
+
+import AuthContext from '../../Context/auth-context';
 
 const addStyleToClass = (classArray,newClassString) => {
     if(classArray.findIndex(e => e === newClassString)===-1)
@@ -73,7 +75,9 @@ const Cockpit = (props) => {
         <div className={personStyleClasses.join(' ')}>
             <h1> {props.title} </h1>
             <button ref={toggleBtnRef} className={toggleButtonCssClasses} onClick={props.click}>{toggleButtonText}</button>
-            <button onClick={props.login} >Log in</button>
+            <AuthContext.Consumer>
+                {(context) => <button onClick={context.login} >Log in</button>}
+            </AuthContext.Consumer>
             {content}
         </div>
     );
