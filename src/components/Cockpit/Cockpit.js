@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+// useContext() allows to access context values anywhere in function
+import React, { useEffect, useRef, useContext } from 'react';
 import moduleClasses from './Cockpit.module.css';
 
 import AuthContext from '../../Context/auth-context';
@@ -18,6 +19,12 @@ const removeStyleFromClass = (classArray,stringToRemove) => {
 const Cockpit = (props) => {
     const toggleBtnRef = useRef(null);
 //  toggleBtnRef.current.click(); -- in here reference to the btn is not added yet so dont use it here
+
+
+    const authContext = useContext(AuthContext);
+    console.log('authContext.authenticated:',authContext.authenticated,'')
+
+
     //Runs for every update
     //Combines componentDidMount and componentDidUpdate
     useEffect(() => {
@@ -75,9 +82,7 @@ const Cockpit = (props) => {
         <div className={personStyleClasses.join(' ')}>
             <h1> {props.title} </h1>
             <button ref={toggleBtnRef} className={toggleButtonCssClasses} onClick={props.click}>{toggleButtonText}</button>
-            <AuthContext.Consumer>
-                {(context) => <button onClick={context.login} >Log in</button>}
-            </AuthContext.Consumer>
+            <button onClick={authContext.login} >Log in</button>
             {content}
         </div>
     );
